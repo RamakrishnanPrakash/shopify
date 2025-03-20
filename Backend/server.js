@@ -22,6 +22,7 @@ dotenv.config();
 
 app.use(express.json());
 app.use(cookieParser());
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/", (req, res) => {
   res.json({ success: true, msg: "API is working" });
 });
@@ -34,7 +35,6 @@ app.use("/api/v0/order", OrderRouter);
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 dbConnection();
 app.listen(PORT, () =>
   console.log(`server running on http://localhost:${PORT}`)
