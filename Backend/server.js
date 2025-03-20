@@ -23,6 +23,7 @@ dotenv.config();
 app.use(express.json());
 app.use(cookieParser());
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+console.log(express.static(path.join(__dirname, "uploads")));
 app.use("/", (req, res) => {
   res.json({ success: true, msg: "API is working" });
 });
