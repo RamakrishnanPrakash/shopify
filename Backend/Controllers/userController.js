@@ -115,6 +115,7 @@ export const logout = async (req, res) => {
         httpOnly: true,
         secure: true,
         sameSite: "None",
+        path: "/",
       })
       .json({ success: true, msg: "Logout" });
   } catch (error) {
