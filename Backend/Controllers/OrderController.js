@@ -6,8 +6,8 @@ import dotenv from "dotenv";
 import { Stripe } from "stripe";
 dotenv.config();
 
-const FRONTEND_URL = "http://localhost:5173";
-const BACKEND_URL = "http://localhost:3000";
+const FRONTEND_URL = "https://shapify-nu.vercel.app";
+const BACKEND_URL = "https://shopify-two-tau.vercel.app";
 const stripe = new Stripe(process.env.STRIPE_PRIVATE_KEY);
 export const cod = async (req, res) => {
   try {
@@ -263,13 +263,13 @@ export const orderCancel = async (req, res) => {
       process.env.JWT_KEY,
       async (err, decode) => {
         if (err) return res.json({ success: false, msg: err.message });
-        console.log(decode);
+        // console.log(decode);
         return decode;
       }
     );
     let order = await OrderModel.findOne({ userEmail: decode.email });
-    console.log("Old Order:", order);
-    console.log("-------------------------------------------------------");
+    // console.log("Old Order:", order);
+    // console.log("-------------------------------------------------------");
     order.order = order.order.find((item) => item._id.toString() !== id);
     await order.save();
     res.json({ success: true, msg: "Payment was cancelled", payment: false });
