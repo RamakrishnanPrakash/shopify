@@ -10,6 +10,10 @@ import userRouter from "./Routes/userRoute.js";
 import cookieParser from "cookie-parser";
 import OrderRouter from "./Routes/OrderRoute.js";
 
+// Get __dirname in ES module
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 app.use(
@@ -31,10 +35,6 @@ app.use("/api/v0/", productRoute);
 app.use("/api/v0/admin", adminRouter);
 app.use("/api/v0/user", userRouter);
 app.use("/api/v0/order", OrderRouter);
-
-// Get __dirname in ES module
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 dbConnection();
 
