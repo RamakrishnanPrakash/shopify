@@ -22,6 +22,9 @@ dotenv.config();
 
 app.use(express.json());
 app.use(cookieParser());
+app.use("/", (req, res) => {
+  res.json({ success: true, msg: "API is working" });
+});
 app.use("/api/v0/", productRoute);
 app.use("/api/v0/admin", adminRouter);
 app.use("/api/v0/user", userRouter);
