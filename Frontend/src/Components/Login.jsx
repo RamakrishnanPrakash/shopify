@@ -26,6 +26,7 @@ export const Login = () => {
         withCredentials: true,
       }
     );
+    console.log(response);
     if (!response.data.success) {
       return toast.error(response.data.msg, { position: "top-right" });
     }

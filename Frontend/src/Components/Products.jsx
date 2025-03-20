@@ -18,7 +18,8 @@ export const Products = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`${BACKEND_URL}/api/v0/product/${id}`);
-        console.log(response);
+
+        console.log("THIS:", response);
         if (!response.data.success) {
           window.location.replace("/");
           setTimeout(() => {
@@ -78,7 +79,7 @@ export const Products = () => {
                 <img
                   src={`${BACKEND_URL}/uploads/${
                     product && product.images[imageIndex]
-                  }`}
+                  }?timestamp=${new Date().getTime()}`}
                   alt=""
                   className="max-w-[300px]"
                 />

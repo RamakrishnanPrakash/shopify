@@ -17,15 +17,24 @@ const StoreContextProvider = (props) => {
 
   const [isLogin, setIsLogin] = useState(false);
   const getCretentials = async () => {
-    const response = await axios.get(`${BACKEND_URL}/api/v0/user/get`, {
-      withCredentials: true,
-    });
-    // console.log(response);
-    if (!response.data.success && !response.data.loggedIn)
-      return setIsLogin(false);
+    try {
+      const response = await axios.get(`${BACKEND_URL}/api/v0/user/get`, {
+        withCredentials: true,
+      });
 
-    setIsLogin(true);
-    setUser(response.data.user);
+      console.log(response);
+      if (!response.data.success && !response.data.loggedIn)
+        return setIsLogin(false);
+
+      if (response.data.success && response.data.loggedIn) {
+        setIsLogin(true);
+        setUser(response.data.user);
+        return;
+      }
+    } catch (error) {
+      console.log(error.message);
+      setIsLogin(false);
+    }
   };
   useEffect(() => {
     getCretentials();

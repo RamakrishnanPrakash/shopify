@@ -10,6 +10,7 @@ export const Profile = () => {
 
   const [blur, setIsBlur] = useState(false);
   const dropdownRef = useRef(null);
+  console.log(isLogin);
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -59,7 +60,7 @@ export const Profile = () => {
         <button
           onFocus={() => setIsBlur(true)}
           className="w-[30px] h-[30px] bg-orange-500 text-white text-lg font-bold rounded-full">
-          {user.email.slice(0, 1).toUpperCase()}
+          {user?.email.slice(0, 1).toUpperCase()}
         </button>
         <div
           ref={dropdownRef}

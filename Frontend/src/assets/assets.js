@@ -64,7 +64,7 @@ export const assets = {
   address_img,
 };
 
-export const BACKEND_URL = "http://localhost:3000";
+export const BACKEND_URL = "https://shopify-two-tau.vercel.app";
 export const STRIPE_PUBLIC_KEY =
   "pk_test_51R2tLmClil64PxAZjCSzLLHTCz7ZkTYgsBqSyAA9BjABgcVwCYpqGKV6Prm8w0spOziCJCsMetPvZ1VxK7ooNmoc00qSlSVMk0";
 export const imageSliderData = [

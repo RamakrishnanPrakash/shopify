@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { assets, BACKEND_URL, productsDummyData } from "../assets/assets";
 
 export const Product = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const currncyConvertor = (currency) => {
     return new Intl.NumberFormat("en-Us", {
       style: "currency",
@@ -17,23 +19,44 @@ export const Product = () => {
         className="w-full my-3 grid grid-cols-2 sm:grid-cols-3 
       lg:grid-cols-4 xl:grid-cols-5 gap-3">
         {productsDummyData.map((product, index) => (
-          <div className="shadow shadow-gray-200/10" key={product._id}>
+          <div className="shadow shadow-gray-200/10 relative" key={product._id}>
+            <div
+              className={`${
+                isLoading
+                  ? "absolute top-0 left-0 w-full h-[250px] bg-slate-200 z-30 animate-pulse"
+                  : "hidden"
+              } `}>
+              <div className="w-full h-full flex items-center justify-center ">
+                <div className="w-[50px] h-[50px] border-[5px] border-gray-800 border-t-orange-500 animate-spin rounded-full"></div>
+              </div>
+            </div>
             <div className="w-full h-52 group p-2 overflow-hidden rounded-lg relative flex items-center justify-center bg-gray-500/10 cursor-pointer">
               <img
-                src={`${BACKEND_URL}/uploads/${product.images[0]}`}
-                className="max-w-4/5 max-h-4/5 md:w-full md:h-full object-cover group-hover:scale-105 transition"
+                src={`${BACKEND_URL}/uploads/${
+                  product.images[0]
+                }?timestamp=${new Date().getTime()}`}
+                className={`${
+                  isLoading
+                    ? "hidden"
+                    : " block max-w-4/5 max-h-4/5 md:w-full md:h-full object-cover group-hover:scale-105 transition"
+                }`}
                 width={800}
                 height={800}
                 alt={product.images[0]}
+                onLoad={() => setIsLoading(false)}
                 onClick={() =>
                   window.location.replace(`/product/${product._id}`)
                 }
               />
+
               <button className="w-6 h-6 shadow-md shadow-gray-500 absolute z-20 top-3 right-3 flex items-center justify-center bg-white rounded-full ">
                 <img src={assets.heard_icon} className="w-4" alt="" />
               </button>
             </div>
-            <div className="w-full p-2">
+            <div
+              className={`${
+                isLoading ? "opacity-0" : " opacity-100 w-full p-2"
+              }`}>
               <h6 className=" block overflow-hidden  whitespace-nowrap my-1 text-gray-600">
                 {product.name}
               </h6>
