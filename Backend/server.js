@@ -38,7 +38,7 @@ app.use("/api/v0/order", OrderRouter);
 
 dbConnection();
 
-module.exports = app;
+export default app;
 // app.listen(PORT, () =>
 //   console.log(`server running on http://localhost:${PORT}`)
 // );
