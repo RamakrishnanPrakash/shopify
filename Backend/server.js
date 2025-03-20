@@ -37,6 +37,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 dbConnection();
-app.listen(PORT, () =>
-  console.log(`server running on http://localhost:${PORT}`)
-);
+
+module.exports = app;
+// app.listen(PORT, () =>
+//   console.log(`server running on http://localhost:${PORT}`)
+// );
