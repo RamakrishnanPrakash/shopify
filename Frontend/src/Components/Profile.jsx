@@ -42,7 +42,7 @@ export const Profile = () => {
         cart: [],
       });
       setIsLogin(false);
-      // window.location.replace("/");
+      window.location.replace("/");
     }
   };
   const card = (e) => {
