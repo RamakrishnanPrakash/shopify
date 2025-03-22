@@ -93,7 +93,7 @@ export const login = async (req, res) => {
     res
       .clearCookie("token", {
         httpOnly: true,
-        secure: true,
+        secure: false,
         sameSite: "None",
         path: "/",
       })
