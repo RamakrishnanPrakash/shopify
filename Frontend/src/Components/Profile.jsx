@@ -27,9 +27,11 @@ export const Profile = () => {
 
   const signOut = async (e) => {
     e.preventDefault();
-    const response = await axios.post(`${BACKEND_URL}/api/v0/user/logout`, {
-      withCredentials: true,
-    });
+    const response = await axios.post(
+      `${BACKEND_URL}/api/v0/user/logout`,
+      {},
+      { withCredentials: true }
+    );
 
     console.log(response);
     if (response.data.success) {
