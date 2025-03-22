@@ -15,7 +15,7 @@ import { sentOtp, verifyOtp } from "../Middleware/userMiddleware.js";
 
 const userRouter = express.Router();
 userRouter.get("/get", getUserDetails);
-userRouter.get("/logout", logout);
+userRouter.post("/logout", logout);
 userRouter.post("/new", sentOtp);
 userRouter.post("/verify/user", verifyOtp, register);
 userRouter.post("/login", login);

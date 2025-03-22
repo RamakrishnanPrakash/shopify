@@ -27,10 +27,11 @@ export const Profile = () => {
 
   const signOut = async (e) => {
     e.preventDefault();
-    const response = await axios.get(`${BACKEND_URL}/api/v0/user/logout`, {
+    const response = await axios.post(`${BACKEND_URL}/api/v0/user/logout`, {
       withCredentials: true,
     });
-    // console.log(response);
+
+    console.log(response);
     if (response.data.success) {
       setUser({
         email: "",
@@ -39,7 +40,7 @@ export const Profile = () => {
         cart: [],
       });
       setIsLogin(false);
-      window.location.replace("/");
+      // window.location.replace("/");
     }
   };
   const card = (e) => {
