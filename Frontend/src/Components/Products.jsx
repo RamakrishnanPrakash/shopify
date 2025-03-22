@@ -10,6 +10,7 @@ import { StoreContext } from "../Context/StoreContext";
 export const Products = () => {
   const { id } = useParams();
   const [isLoading, setIsLoading] = useState(true);
+  const [isAddCardBtn, setIsAddCardBtn] = useState(false);
   const [product, setProduct] = useState({});
   const [imageIndex, setImageIndex] = useState(0);
   const { user, isLogin, setIsLoginComponent, setIsLoginPage, setUser } =
@@ -19,7 +20,7 @@ export const Products = () => {
       try {
         const response = await axios.get(`${BACKEND_URL}/api/v0/product/${id}`);
 
-        console.log("THIS:", response);
+        // console.log("THIS:", response);
         if (!response.data.success) {
           window.location.replace("/");
           setTimeout(() => {
@@ -41,14 +42,15 @@ export const Products = () => {
   }, []);
 
   const addCardItem = async (id) => {
-    console.log("email");
-    console.log(user);
+    // console.log("email");
+    // console.log(user);
     if (!isLogin) {
       setIsLoginPage(true);
       setIsLoginComponent(true);
       return;
     }
     if (isLogin) {
+      setIsAddCardBtn(true);
       const response = await axios.patch(
         `${BACKEND_URL}/api/v0/user/card/${id}`,
         {
@@ -58,6 +60,7 @@ export const Products = () => {
       if (response.data.success) {
         setUser((prev) => ({ ...prev, ["cart"]: response.data.cart }));
         toast.success("Product update in your cart");
+        return setIsAddCardBtn(false);
       }
     }
     // const response = await axios.patch(`${BACKEND_URL}/api/v0/user/card/${id}`);
@@ -66,7 +69,7 @@ export const Products = () => {
     addCardItem(id);
     if (isLogin) setTimeout(() => window.location.replace("/card"), 1000);
   };
-  console.log(id);
+  // console.log(id);
   return (
     <>
       <div className="flex flex-col md:flex-row gap-16 items-center justify-evenly py-6 px-16">
@@ -155,11 +158,17 @@ export const Products = () => {
                 </div>
               </div>
               <div className="flex gap-3 mt-4">
-                <button
-                  onClick={() => addCardItem(product._id)}
-                  className="w-[50%] text-lg py-3 rounded-md bg-gray-300 hover:bg-gray-400">
-                  Add to Card
-                </button>
+                {isAddCardBtn ? (
+                  <div className="w-[50%] bg-gray-300 flex items-center justify-center rounded-md cursor-pointer">
+                    <button className="w-[20px] h-[20px] rounded-full border border-t-orange-500  border-gray-500 animate-spin-fast"></button>
+                  </div>
+                ) : (
+                  <button
+                    onClick={() => addCardItem(product._id)}
+                    className="w-[50%] text-lg py-3 rounded-md bg-gray-300 hover:bg-gray-400">
+                    Add to Card
+                  </button>
+                )}
                 <button
                   onClick={() => buyNowItem(product._id)}
                   className="w-[50%] text-lg py-3 rounded-md bg-orange-500 hover:bg-orange-600 text-center text-white">

@@ -12,13 +12,15 @@ export const Login = () => {
     password: "",
   });
   const [isLoading, setIsLoading] = useState(false);
+  // const [isLoginBtn, setIsLoginBtn] = useState(true);
 
   const onChangeHandler = (e) => {
     setIsInputData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
   const submitHandler = async (e) => {
     e.preventDefault();
-    console.log(inputData);
+    setIsLoading(true);
+    // console.log(inputData);
     const response = await axios.post(
       `${BACKEND_URL}/api/v0/user/login`,
       { email: inputData.email, password: inputData.password },
@@ -26,11 +28,13 @@ export const Login = () => {
         withCredentials: true,
       }
     );
-    console.log(response);
+    // console.log(response);
     if (!response.data.success) {
-      return toast.error(response.data.msg, { position: "top-right" });
+      toast.error(response.data.msg, { position: "top-right" });
+      return setIsLoading(false);
     }
     toast.success(response.data.msg);
+    setIsLoading(false);
     setTimeout(() => {
       window.location.replace("/");
     }, 2000);
