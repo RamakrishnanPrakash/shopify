@@ -115,8 +115,14 @@ export const logout = async (req, res) => {
       secure: true,
       sameSite: "None",
     });
+
     res
-      .cookie("token", "", { expires: new Date(0), path: "/" })
+      .cookie("token", "", {
+        httpOnly: true,
+        secure: true,
+        sameSite: "None",
+        expires: new Date(0),
+      })
       .json({ success: true, msg: "Logout" });
   } catch (error) {
     res.status(400).json({
