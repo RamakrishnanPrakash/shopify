@@ -89,13 +89,13 @@ export const login = async (req, res) => {
     const token = jwt.sign({ email: email }, process.env.JWT_KEY, {
       expiresIn: "24h",
     });
-
     res
-      .clearCookie("token", {
+      .cookie("token", token, {
         httpOnly: true,
         secure: true,
         sameSite: "None",
         path: "/",
+        maxAge: 24 * 60 * 60 * 1000,
       })
       .json({
         success: true,
