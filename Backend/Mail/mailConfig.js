@@ -9,8 +9,8 @@ const mailSend = async (to, subject, content) => {
       port: 587,
       secure: false,
       auth: {
-        user: "krishcreation2024@gmail.com",
-        pass: "mdiy psxb ubnt ylct",
+       user:process.env.user,
+       pass:process.env.pass
       },
     });
 
